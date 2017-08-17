@@ -1,0 +1,35 @@
+{
+    // 月份名称
+    "monthNames": ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    // 月份名称缩写
+    ,"monthAbbreviations": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    // 星期名称
+    ,"dayNames": ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    // 星期名称缩写
+    ,"dayAbbreviations": ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    // 时间差
+    ,"timeDiff": {
+        "in ## years": "in ## years"
+        ,"in ## months": "in ## months"
+        ,"in ## weeks": "in ## weeks"
+        ,"in ## days": "in ## days"
+        ,"in ## hours": "in ## hours"
+        ,"in about one hour": "in about one hour"
+        ,"in about half hour": "in about half hour"
+        ,"in some minutes": "in some minutes"
+        ,"in few minutes": "in few minutes"
+        ,"just now": "just now"
+        ,"few minutes ago": "few minutes ago"
+        ,"some minutes ago": "some minutes ago"
+        ,"about half hour ago": "about half hour ago"
+        ,"about an hour ago": "about an hour ago"
+        ,"few hours ago": "few hours ago"
+        ,"## hours ago": "## hours ago"
+        ,"## days ago": "## days ago"
+        ,"## weeks ago": "## weeks ago"
+        ,"## months ago": "## months ago"
+        ,"## years ago": "## years ago"
+    }
+    // 今天
+    ,"today": "today"
+}

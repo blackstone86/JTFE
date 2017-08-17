@@ -1,0 +1,41 @@
+{
+  "YES":                 "是的",
+  "NO":                  "没有",
+  "FLD_CONFIRM_DELETE":  "确认删除?",
+  "INVALID_DATA":        "插入数据的字段格式不对。",
+  "ERROR_ON_FIELD":      "错误字段",
+  "OUT_OF_BOUDARIES":      "不是字段允许值:",
+  "CLOSE_ALL_CONTAINERS":"关闭所有?",
+  "DO_YOU_CONFIRM":      "你确认吗?",
+  "ERR_FIELD_MAX_SIZE_EXCEEDED":      "字段超出上限值",
+  "WEEK_SHORT":      "周.",
+
+  "FILE_TYPE_NOT_ALLOWED":"不允许的文件类型。",
+  "FILE_UPLOAD_COMPLETED":"文件上传完成。",
+  "UPLOAD_MAX_SIZE_EXCEEDED":"文件大小超出上限值",
+  "ERROR_UPLOADING":"上传错误",
+  "UPLOAD_ABORTED":"上传中止",
+  "DROP_HERE":"拖拽文件到这",
+
+  "FORM_IS_CHANGED":     "页面上有一些未保存的数据！",
+
+  "PIN_THIS_MENU": "固定菜单",
+  "UNPIN_THIS_MENU": "取消固定菜单",
+  "OPEN_THIS_MENU": "打开菜单",
+  "CLOSE_THIS_MENU": "关闭菜单",
+  "PROCEED": "继续进行?",
+
+  "PREV": "上一页",
+  "NEXT": "下一页",
+  "HINT_SKIP": "明白了，关掉这个提示。",
+
+  "WANT_TO_SAVE_FILTER": "保存这个过滤器",
+  "NEW_FILTER_NAME": "新过滤器的名称",
+  "SAVE": "保存",
+  "DELETE": "删除",
+
+  "COMBO_NO_VALUES": "没有可用的值……?",
+
+  "FILTER_UPDATED":"过滤器已更新。",
+  "FILTER_SAVED":"过滤器已保存。"
+}

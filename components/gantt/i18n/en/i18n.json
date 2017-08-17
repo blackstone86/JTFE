@@ -1,0 +1,41 @@
+{
+  "YES":                 "Yes",
+  "NO":                  "No",
+  "FLD_CONFIRM_DELETE":  "confirm the deletion?",
+  "INVALID_DATA":        "The data inserted are invalid for the field format.",
+  "ERROR_ON_FIELD":      "Error on field",
+  "OUT_OF_BOUDARIES":      "Out of field admitted values:",
+  "CLOSE_ALL_CONTAINERS":"close all?",
+  "DO_YOU_CONFIRM":      "Do you confirm?",
+  "ERR_FIELD_MAX_SIZE_EXCEEDED":      "Field max size exceeded",
+  "WEEK_SHORT":      "W.",
+
+  "FILE_TYPE_NOT_ALLOWED":"File type not allowed.",
+  "FILE_UPLOAD_COMPLETED":"File upload completed.",
+  "UPLOAD_MAX_SIZE_EXCEEDED":"Max file size exceeded",
+  "ERROR_UPLOADING":"Error uploading",
+  "UPLOAD_ABORTED":"Upload aborted",
+  "DROP_HERE":"Drop files here",
+
+  "FORM_IS_CHANGED":     "You have some unsaved data on the page!",
+
+  "PIN_THIS_MENU": "PIN_THIS_MENU",
+  "UNPIN_THIS_MENU": "UNPIN_THIS_MENU",
+  "OPEN_THIS_MENU": "OPEN_THIS_MENU",
+  "CLOSE_THIS_MENU": "CLOSE_THIS_MENU",
+  "PROCEED": "Proceed?",
+
+  "PREV": "Previous",
+  "NEXT": "Next",
+  "HINT_SKIP": "Got it, close this hint.",
+
+  "WANT_TO_SAVE_FILTER": "save this filter",
+  "NEW_FILTER_NAME": "name of the new filter",
+  "SAVE": "Save",
+  "DELETE": "Delete",
+
+  "COMBO_NO_VALUES": "no values available...?",
+
+  "FILTER_UPDATED":"Filter updated.",
+  "FILTER_SAVED":"Filter correctly saved."
+}

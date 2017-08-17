@@ -1,0 +1,14 @@
+{
+  "name": "jQueryGantt",
+  "homepage": "https://github.com/robicch/jQueryGantt",
+  "_release": "ce51ef7c42",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "ce51ef7c42eeaa929f151862d80cde923de7feaf"
+  },
+  "_source": "https://github.com/robicch/jQueryGantt.git",
+  "_target": "*",
+  "_originalSource": "robicch/jQueryGantt",
+  "_direct": true
+}

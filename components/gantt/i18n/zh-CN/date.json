@@ -1,0 +1,35 @@
+{
+    // 月份名称
+    "monthNames": ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+    // 月份名称缩写
+    ,"monthAbbreviations": ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+    // 星期名称
+    ,"dayNames": ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+    // 星期名称缩写
+    ,"dayAbbreviations": ["周日","周一","周二","周三","周四","周五","周六"]
+    // 时间差
+    ,"timeDiff": {
+        "in ## years": "## 年后"
+        ,"in ## months": "## 月后"
+        ,"in ## weeks": "## 周后"
+        ,"in ## days": "## 天后"
+        ,"in ## hours": "## 小时后"
+        ,"in about one hour": "大约一个小时后"
+        ,"in about half hour": "大约半小时后"
+        ,"in some minutes": "几分钟后"
+        ,"in few minutes": "几分钟后"
+        ,"just now": "刚刚"
+        ,"few minutes ago": "几分钟前"
+        ,"some minutes ago": "几分钟前"
+        ,"about half hour ago": "大约半小时前"
+        ,"about an hour ago": "大约一个小时前"
+        ,"few hours ago": "几个小时前"
+        ,"## hours ago": "## 小时前"
+        ,"## days ago": "## 天前"
+        ,"## weeks ago": "## 周前"
+        ,"## months ago": "## 月前"
+        ,"## years ago": "## 年前"
+    }
+    // 今天
+    ,"today": "今天"
+}

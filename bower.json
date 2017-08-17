@@ -1,0 +1,29 @@
+{
+  "name": "gantt",
+  "description": "gantt demo",
+  "main": "main.js",
+  "authors": [
+    "hjw <asianking86@qq.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "gantt",
+    "jquery",
+    "jqueryGantt"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "component_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jQueryGantt": "robicch/jQueryGantt",
+    "jquery-ui": "^1.12.1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "CANNOT_WRITE":                          "只读",
+  "CHANGE_OUT_OF_SCOPE":                   "编辑器域外没有权限更新",
+  "START_IS_MILESTONE":                    "开始是里程碑",
+  "END_IS_MILESTONE":                      "结束是里程碑",
+  "TASK_HAS_CONSTRAINTS":                  "任务有约束",
+  "GANTT_ERROR_DEPENDS_ON_OPEN_TASK":      "甘特图错误_依赖打开的任务",
+  "GANTT_ERROR_DESCENDANT_OF_CLOSED_TASK": "甘特图错误_已关闭的任务子节点",
+  "TASK_HAS_EXTERNAL_DEPS":                "任务有外部依赖",
+  "GANTT_ERROR_LOADING_DATA_TASK_REMOVED": "甘特图错误_加载已移除的任务",
+  "CIRCULAR_REFERENCE":                    "循环引用",
+  "CANNOT_MOVE_TASK":                      "不能移动任务",
+  "CANNOT_DEPENDS_ON_ANCESTORS":           "不能依赖祖先节点",
+  "CANNOT_DEPENDS_ON_DESCENDANTS":         "不能依赖子孙节点",
+  "INVALID_DATE_FORMAT":                   "错误日期格式",
+  "GANTT_QUARTER_SHORT":                   "季度.",
+  "GANTT_SEMESTER_SHORT":                  "学期.",
+  "CANNOT_CLOSE_TASK_IF_OPEN_ISSUE":       "如果有问题不能关闭任务",
+  "PLEASE_SAVE_PROJECT":                   "请保存项目"
+}
