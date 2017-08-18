@@ -20,7 +20,14 @@
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-function GanttMaster() {
+
+ /**
+  * 甘特图构造函数
+  * @param {Object} config 配置项
+  * @param {String} config.resourceUrl 资源路径
+  */
+function GanttMaster(config) {
+  if(!config) config = {};
   this.tasks = [];
   this.deletedTaskIds = [];
   this.links = [];
@@ -66,7 +73,7 @@ function GanttMaster() {
 
   this.currentTask; // task currently selected;
 
-  this.resourceUrl = "res/"; // URL to resources (images etc.)
+  this.resourceUrl = config.resourceUrl ? config.resourceUrl : "res/"; // URL to resources (images etc.)
   this.__currentTransaction;  // a transaction object holds previous state during changes
   this.__undoStack = [];
   this.__redoStack = [];

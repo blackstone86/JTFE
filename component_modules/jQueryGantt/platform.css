@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'TeamworkRegular';
-  src: url('res/icons.eot?5qjga5');
-  src: url('res/icons.eot?#iefix5qjga5') format('embedded-opentype'),
-  url('res/icons.woff?5qjga5') format('woff'),
-  url('res/icons.ttf?5qjga5') format('truetype'),
-  url('res/icons.svg?5qjga5#icons') format('svg');
+  src: url('./res/icons.eot?5qjga5');
+  src: url('./res/icons.eot?#iefix5qjga5') format('embedded-opentype'),
+  url('./res/icons.woff?5qjga5') format('woff'),
+  url('./res/icons.ttf?5qjga5') format('truetype'),
+  url('./res/icons.svg?5qjga5#icons') format('svg');
   font-weight: normal !important;
   font-style: normal;
 }
@@ -614,7 +614,7 @@ select {
   height: 25px;
   mmmargin-left: -20px;
   mmmposition: absolute;
-  background: url("../../applications/gantt/distrib/res/alert.gif") no-repeat;
+  background: url("./res/alert.gif") no-repeat;
 }
 
 span#FLD_LOGIN_NAMEerror, span#FLD_PWDerror {

@@ -55,6 +55,8 @@ var DEFAULT_SET = {
     key: common.getRandom()
     // 语言 zh-CN 简体中文，en 英文
     ,language: "zh-CN"
+    // 资源路径
+    ,resourceUrl: "../components/gantt/imgs/"
 }
 
 /**
@@ -109,7 +111,9 @@ GP.init = function(){
     }
 
     // 实例化甘特图，ganttMaster.js 用到 ge 实例
-    window.ge = this.$gantt = new GanttMaster();
+    window.ge = this.$gantt = new GanttMaster({
+        resourceUrl: this.config.resourceUrl
+    });
 
     // 缓存模板
     this.tplCache();

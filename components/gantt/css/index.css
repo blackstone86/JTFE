@@ -1,4 +1,4 @@
-.gantt{
+.M-gantt{
     padding:0px; 
     overflow-y:auto; 
     overflow-x:hidden;
@@ -7,18 +7,18 @@
     margin:0 5px;
 }
 
-.gantt .resEdit {
+.M-gantt .resEdit {
     padding: 15px;
 }
 
-.gantt .resLine {
+.M-gantt .resLine {
     width: 95%;
     padding: 3px;
     margin: 5px;
     border: 1px solid #d0d0d0;
 }
 
-.gantt .ganttButtonBar h1{
+.M-gantt .ganttButtonBar h1{
     color: #000000;
     font-weight: bold;
     font-size: 28px;

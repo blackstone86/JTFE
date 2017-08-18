@@ -1,8 +1,6 @@
 var _tpl = 
 `<div class="ganttButtonBar noprint">
     <div class="buttons">
-        <a href="https://gantt.twproject.com/"><img src="res/twGanttLogo.png" alt="Twproject" align="absmiddle" style="max-width: 136px; padding-right: 15px"></a>
-
         <button onclick="$('#workSpace').trigger('undo.gantt');return false;" class="button textual icon requireCanWrite" title="undo"><span class="teamworkIcon">&#39;</span></button>
         <button onclick="$('#workSpace').trigger('redo.gantt');return false;" class="button textual icon requireCanWrite" title="redo"><span class="teamworkIcon">&middot;</span></button>
         <span class="ganttButtonSeparator requireCanWrite requireCanAdd"></span>
@@ -37,8 +35,8 @@ var _tpl =
 
         <button onclick="editResources();" class="button textual requireWrite" title="edit resources"><span class="teamworkIcon">M</span></button>
         &nbsp; &nbsp; &nbsp; &nbsp;
-        <button onclick="saveGanttOnServer();" class="button first big requireWrite" title="Save">Save</button>
-        <button onclick='newProject();' class='button requireWrite newproject'><em>clear project</em></button>
+        <button onclick="saveGanttOnServer();" class="button first big requireWrite" title="Save">保存</button>
+        <button onclick='newProject();' class='button requireWrite newproject'>清空项目</button>
         <button class="button login" title="login/enroll" onclick="loginEnroll($(this));" style="display:none;">login/enroll</button>
         <button class="button opt collab" title="Start with Twproject" onclick="collaborate($(this));" style="display:none;"><em>collaborate</em></button>
     </div>
