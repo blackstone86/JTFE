@@ -20,7 +20,7 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+var dialog = require("./dialogs");
 
 // works also for IE8 beta
 var isExplorer = navigator.userAgent.toUpperCase().indexOf("MSIE") >= 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
@@ -378,11 +378,11 @@ function openPersistentFile(file) {
       var hasTop=false;
       img.width(w).height(h).css({position: "static", top: 0, left: 0});
 
-      t.createModalPopup(w+100,h+100).append(img);
+      dialog.createModalPopup(w+100,h+100).append(img);
     });
     t.$("body").append(img);
   } else if (file.mime.indexOf("pdf") >= 0) {
-    t.openBlackPopup(file.url, $(t).width()*.8, $(t).height()*.8);
+    dialog.openBlackPopup(file.url, $(t).width()*.8, $(t).height()*.8);
 	} else {
 		window.open(file.url + "&TREATASATTACH=yes");
 	}

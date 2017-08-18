@@ -623,6 +623,7 @@ function pad(str, len, ch) {
 		return str
 	}
 }
+module.exports.pad = pad;
 
 function getMillisInHours(millis) {
 	if (!millis)
@@ -630,6 +631,8 @@ function getMillisInHours(millis) {
 	var hour = Math.floor(millis / 3600000);
 	return  ( millis >= 0 ? "" : "-") + pad(hour, 1, "0");
 }
+module.exports.getMillisInHours = getMillisInHours;
+
 function getMillisInHoursMinutes(millis) {
 	if (typeof(millis) != "number")
 		return "";
@@ -640,6 +643,7 @@ function getMillisInHoursMinutes(millis) {
 	var min = Math.floor((millis % 3600000) / 60000);
 	return  (sgn > 0 ? "" : "-") + pad(hour, 1, "0") + ":" + pad(min, 2, "0");
 }
+module.exports.getMillisInHoursMinutes = getMillisInHoursMinutes;
 
 function getMillisInDaysHoursMinutes(millis) {
 	if (!millis)
@@ -652,6 +656,7 @@ function getMillisInDaysHoursMinutes(millis) {
 	var min = Math.floor((millis - days * millisInWorkingDay - hour * 3600000) / 60000);
 	return (sgn >= 0 ? "" : "-") + (days > 0 ? days + "  " : "") + pad(hour, 1, "0") + ":" + pad(min, 2, "0");
 }
+module.exports.getMillisInDaysHoursMinutes = getMillisInDaysHoursMinutes;
 
 function millisFromHourMinute(stringHourMinutes) { //All this format are valid: "12:58" "13.75"  "63635676000" (this is already in milliseconds)
 	var result = 0;
@@ -682,7 +687,7 @@ function millisFromHourMinute(stringHourMinutes) { //All this format are valid: 
 		return result;
 	}
 }
-
+module.exports.millisFromHourMinute = millisFromHourMinute;
 
 /**
  * @param string              "3y 4d", "4D:08:10", "12M/3d", "1.5D", "2H4D", "3M4d,2h", "12:30", "11", "3", "1.5", "2m/3D", "12/3d", "1234"
@@ -743,6 +748,7 @@ function millisFromString(string, considerWorkingdays) {
 
 	return totMillis;
 }
+module.exports.millisFromString = millisFromString;
 
 /**
  * @param string              "3y 4d", "4D:08:10", "12M/3d", "2H4D", "3M4d,2h", "12:30", "11", "3", "1.5", "2m/3D", "12/3d", "1234"
@@ -793,3 +799,4 @@ function daysFromString(string, considerWorkingdays) {
 
 	return parseInt(totDays);
 }
+module.exports.daysFromString = daysFromString;

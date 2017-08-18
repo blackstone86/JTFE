@@ -1,4 +1,5 @@
-<div class="ganttTaskEditor">
+var _tpl = 
+`<div class="ganttTaskEditor">
     <h2 class="taskData">Task editor</h2>
     <table cellspacing="1" cellpadding="5" width="100%" class="taskData table" border="0">
         <tr>
@@ -69,4 +70,5 @@
     <div style="text-align: right; padding-top: 20px">
         <span id="saveButton" class="button first" onClick="$(this).trigger('saveFullEditor.gantt');">Save</span>
     </div>
-</div>
+</div>`
+module.exports = _tpl;

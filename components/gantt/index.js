@@ -21,7 +21,7 @@ require("../../component_modules/jQueryGantt/libs/jquery/JST/jquery.JST");
 require("../../component_modules/jQueryGantt/libs/utilities");
 require("../../component_modules/jQueryGantt/libs/forms");
 require("../../component_modules/jQueryGantt/libs/date");
-require("../../component_modules/jQueryGantt/libs/dialogs");
+var dialog = require("../../component_modules/jQueryGantt/libs/dialogs");
 require("../../component_modules/jQueryGantt/libs/layout");
 require("../../component_modules/jQueryGantt/libs/layout");
 require("../../component_modules/jQueryGantt/libs/i18nJs");
@@ -30,6 +30,20 @@ require("../../component_modules/jQueryGantt/ganttTask");
 require("../../component_modules/jQueryGantt/ganttDrawerSVG");
 require("../../component_modules/jQueryGantt/ganttGridEditor");
 require("../../component_modules/jQueryGantt/ganttMaster");
+
+// 注册模板
+var _tpls = {
+    "assignment_row": require("./tpls/assignment_row.tpl")
+    ,"change_status": require("./tpls/change_status.tpl")
+    ,"gantbuttons": require("./tpls/gantbuttons.tpl")
+    ,"resource_editor": require("./tpls/resource_editor.tpl")
+    ,"resource_row": require("./tpls/resource_row.tpl")
+    ,"task_editor": require("./tpls/task_editor.tpl")
+    ,"taskbar": require("./tpls/taskbar.tpl")
+    ,"taskemptyrow": require("./tpls/taskemptyrow.tpl")
+    ,"taskrow": require("./tpls/taskrow.tpl")
+    ,"tasksedithead": require("./tpls/tasksedithead.tpl")
+};
 
 /**
  * 甘特图的默认设置
@@ -46,6 +60,7 @@ var DEFAULT_SET = {
 /**
  * 甘特图构造函数
  * @param {Object} conf 模块配置
+ * @public
  */
 function Gantt(conf){
 
@@ -76,11 +91,16 @@ function Gantt(conf){
     }
 }
 
+/**
+ * 甘特图原型对象
+ * @public
+*/
 var GP = Gantt.prototype;
 
 /**
  * 初始化函数
  * @return {Object} 模块实例
+ * @public
  */
 GP.init = function(){
 
@@ -88,8 +108,11 @@ GP.init = function(){
         return this;
     }
 
-    // 实例化甘特图
-    this.$gantt = new GanttMaster();
+    // 实例化甘特图，ganttMaster.js 用到 ge 实例
+    window.ge = this.$gantt = new GanttMaster();
+
+    // 缓存模板
+    this.tplCache();
 
     // 甘特图初始化
     this.$gantt.init(this.config.target);
@@ -104,7 +127,7 @@ GP.init = function(){
     delete this.$gantt.gantt.zoom;
 
     // 设置数据
-    this.setData()
+    this.setData();
 
     // 清空 undo 堆栈
     this.$gantt.checkpoint();
@@ -119,8 +142,79 @@ GP.init = function(){
 }
 
 /**
+ * 缓存模板
+ * @public
+ */
+GP.tplCache = function(){
+    Object.keys(_tpls).forEach(function(name){
+        // 模板
+        var tpl = _tpls[name];
+        // 模板名称
+        var _name = name.toUpperCase();
+        // 缓存模板
+        if (!tpl.match(/##\w+##/)) { // is Resig' style? e.g. (#=id#) or (# ...some javascript code 'obj' is the alias for the object #)
+            var strFunc =
+                "var p=[],print=function(){p.push.apply(p,arguments);};" +
+                "with(obj){p.push('" +
+                tpl.replace(/[\r\t\n]/g, " ")
+                .replace(/'(?=[^#]*#\))/g, "\t")
+                .split("'").join("\\'")
+                .split("\t").join("'")
+                .replace(/\(#=(.+?)#\)/g, "',$1,'")
+                .split("(#").join("');")
+                .split("#)").join("p.push('")
+                + "');}return p.join('');";
+            try {
+                $.JST._templates[_name] = new Function("obj", strFunc);
+            } catch (e) {
+                console.error("JST error: " + _name);
+            }
+        } else { //plain template   e.g. ##id##
+            try {
+                $.JST._templates[_name] = tpl;
+            } catch (e) {
+                console.error("JST error: " + _name);
+            }
+        }
+    });
+
+    $.JST.loadDecorator("RESOURCE_ROW", function(resTr, res){
+        resTr.find(".delRes").click(function(){$(this).closest("tr").remove()});
+    });
+
+    $.JST.loadDecorator("ASSIGNMENT_ROW", function(assigTr, taskAssig){
+        var resEl = assigTr.find("[name=resourceId]");
+        var opt = $("<option>");
+        resEl.append(opt);
+        for(var i=0; i< taskAssig.task.master.resources.length;i++){
+            var res = taskAssig.task.master.resources[i];
+            opt = $("<option>");
+            opt.val(res.id).html(res.name);
+            if(taskAssig.assig.resourceId == res.id)
+                opt.attr("selected", "true");
+            resEl.append(opt);
+        }
+        var roleEl = assigTr.find("[name=roleId]");
+        for(var i=0; i< taskAssig.task.master.roles.length;i++){
+            var role = taskAssig.task.master.roles[i];
+            var optr = $("<option>");
+            optr.val(role.id).html(role.name);
+            if(taskAssig.assig.roleId == role.id)
+            optr.attr("selected", "true");
+            roleEl.append(optr);
+        }
+        if(taskAssig.task.master.permissions.canWrite && taskAssig.task.canWrite){
+            assigTr.find(".delAssig").click(function(){
+                var tr = $(this).closest("[assId]").fadeOut(200, function(){$(this).remove()});
+            });
+        }
+    });
+}
+
+/**
  * 设置模块语言
  * @param {String} language 语言 可选值 zh-CN 简体中文；en 英文
+ * @public
  */
 GP.setLanguage = function(language){
     seti18n(language);
@@ -128,6 +222,7 @@ GP.setLanguage = function(language){
 
 /**
  * 重置模块
+ * @public
  */
 GP.reset = function(){
     if (!this.$gantt) {
@@ -139,9 +234,20 @@ GP.reset = function(){
 
 /**
  * 设置模块数据
- * @param {String} lsKey 数据键
+ * @public
+ * @todo 真实从服务端获取数据
  */
-GP.setData = function(lsKey){
+GP.setData = function(){
+    // 拿本地缓存设置模块数据
+    this.setDataFromLocal(this.config.key);
+};
+
+/**
+ * 拿本地缓存设置模块数据
+ * @param {String} lsKey 数据键
+ * @public
+ */
+GP.setDataFromLocal = function(lsKey){
     // 项目数据
     var prjdat = [];
 
@@ -181,10 +287,11 @@ GP.setData = function(lsKey){
 };
 
 /**
- * 设置模块数据
+ * 保存模块数据到本地缓存
  * @param {String} lsKey 数据键
+ * @public
  */
-GP.saveData = function(lsKey){
+GP.saveDataToLocal = function(lsKey){
     var prjdat = this.$gantt.saveProject();
     if (ls && prjdat && lsKey) {
         ls.set(lsKey, prjdat);
@@ -192,7 +299,98 @@ GP.saveData = function(lsKey){
 }
 
 /**
+ * 保存数据到服务器
+ * 引用模板：gantbuttons.tpl
+ * @public
+ */
+GP.saveGanttOnServer = function() {
+  // 模拟实现
+  this.saveDataToLocal(this.config.key);
+}
+
+/**
+ * 新建项目
+ * 引用模板：gantbuttons.tpl
+ * @public
+ */
+GP.newProject = function(){
+    var ge = this.$gantt;
+    ge.reset();
+}
+
+/**
+ * 打开一个弹窗管理资源(resources)
+ * 注：模拟实现，通常资源来源于服务器
+ * 引用模板：gantbuttons.tpl
+ * @public
+ */
+GP.editResources = function(){
+  var ge = this.$gantt;
+
+  // make resource editor
+  var resourceEditor = $.JST.createFromTemplate({}, "RESOURCE_EDITOR");
+  var resTbl=resourceEditor.find("#resourcesTable");
+
+  for (var i=0;i<ge.resources.length;i++){
+    var res=ge.resources[i];
+    resTbl.append($.JST.createFromTemplate(res, "RESOURCE_ROW"))
+  }
+
+  // bind add resource
+  resourceEditor.find("#addResource").click(function(){
+    resTbl.append($.JST.createFromTemplate({id:"new",name:"resource"}, "RESOURCE_ROW"))
+  });
+
+  // bind save event
+  resourceEditor.find("#resSaveButton").click(function(){
+    var newRes=[];
+    // find for deleted res
+    for (var i=0;i<ge.resources.length;i++){
+      var res=ge.resources[i];
+      var row = resourceEditor.find("[resId="+res.id+"]");
+      if (row.length>0){
+        // if still there save it
+        var name = row.find("input[name]").val();
+        if (name && name!="")
+          res.name=name;
+        newRes.push(res);
+      } else {
+        // remove assignments
+        for (var j=0;j<ge.tasks.length;j++){
+          var task=ge.tasks[j];
+          var newAss=[];
+          for (var k=0;k<task.assigs.length;k++){
+            var ass=task.assigs[k];
+            if (ass.resourceId!=res.id)
+              newAss.push(ass);
+          }
+          task.assigs=newAss;
+        }
+      }
+    }
+
+    // loop on new rows
+    var cnt=0
+    resourceEditor.find("[resId=new]").each(function(){
+      cnt++;
+      var row = $(this);
+      var name = row.find("input[name]").val();
+      if (name && name!="")
+        newRes.push (new Resource("tmp_"+new Date().getTime()+"_"+cnt,name));
+    });
+
+    ge.resources=newRes;
+
+    dialog.closeBlackPopup();
+    ge.redraw();
+  });
+
+  var ndo = dialog.createModalPopup(400, 500).append(resourceEditor);
+}
+
+/**
  * 销毁模块
+ * @public
  */
 GP.destroy = function(){
     if (this.$gantt) {

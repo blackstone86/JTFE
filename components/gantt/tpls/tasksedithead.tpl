@@ -1,4 +1,5 @@
-<table class="gdfTable" cellspacing="0" cellpadding="0">
+var _tpl = 
+`<table class="gdfTable" cellspacing="0" cellpadding="0">
     <thead>
         <tr style="height:40px">
             <th class="gdfColHeader" style="width:35px; border-right: none"></th>
@@ -15,4 +16,5 @@
             <th class="gdfColHeader gdfResizable" style="width:1000px; text-align: left; padding-left: 10px;">assignees</th>
         </tr>
     </thead>
-</table>
+</table>`
+module.exports = _tpl;

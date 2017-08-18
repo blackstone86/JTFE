@@ -1,4 +1,5 @@
-<div class="ganttButtonBar noprint">
+var _tpl = 
+`<div class="ganttButtonBar noprint">
     <div class="buttons">
         <a href="https://gantt.twproject.com/"><img src="res/twGanttLogo.png" alt="Twproject" align="absmiddle" style="max-width: 136px; padding-right: 15px"></a>
 
@@ -41,4 +42,5 @@
         <button class="button login" title="login/enroll" onclick="loginEnroll($(this));" style="display:none;">login/enroll</button>
         <button class="button opt collab" title="Start with Twproject" onclick="collaborate($(this));" style="display:none;"><em>collaborate</em></button>
     </div>
-</div>
+</div>`
+module.exports = _tpl;

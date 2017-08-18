@@ -31,6 +31,7 @@ function centerPopup(url, target, w, h, scroll, resiz) {
 		win.window.focus();
 	}
 }
+module.exports.centerPopup = centerPopup;
 
 function openCenteredWindow(url, target, winprops) {
 	var prop_array = winprops.split(",");
@@ -59,6 +60,7 @@ function openCenteredWindow(url, target, winprops) {
 		win.window.focus();
 	}
 }
+module.exports.openCenteredWindow = openCenteredWindow;
 
 function showFeedbackMessage(typeOrObject, message, title, autoCloseTime) {
 
@@ -91,6 +93,7 @@ function showFeedbackMessage(typeOrObject, message, title, autoCloseTime) {
 		$(".FFC_WARNING").stopTime("ffchide").oneTime(75000, "ffchide",function () {$(this).fadeOut(400,function(){$(this)})});
 		$(".FFC_ERROR").stopTime("ffchide").oneTime(10000, "ffchide",function () {$(this).fadeOut(400,function(){$(this)})});
 }
+module.exports.showFeedbackMessage = showFeedbackMessage;
 
 function showFeedbackMessageInDiv(type, message, divId) {
 	var place = $("#" + divId);
@@ -101,10 +104,12 @@ function showFeedbackMessageInDiv(type, message, divId) {
 		$(".FFC_OK").fadeOut();
 	});
 }
+module.exports.showFeedbackMessageInDiv = showFeedbackMessageInDiv;
+
 function hideFeedbackMessages() {
   $("#__FEEDBACKMESSAGEPLACE").empty();
 }
-
+module.exports.hideFeedbackMessages = hideFeedbackMessages;
 
 function submitInBlack(formId, actionHref, w, h) {
 
@@ -127,7 +132,7 @@ function submitInBlack(formId, actionHref, w, h) {
 	else
 		form.removeAttr("target");
 }
-
+module.exports.submitInBlack = submitInBlack;
 
 var __popups = [];
 function createModalPopup(width, height, onCloseCallBack, cssClass, element, popupOpener) {
@@ -319,6 +324,7 @@ function createModalPopup(width, height, onCloseCallBack, cssClass, element, pop
 
   return internalDiv;
 }
+module.exports.createModalPopup = createModalPopup;
 
 function changeModalSize(w,h){
 	var newDim = {};
@@ -333,6 +339,7 @@ function changeModalSize(w,h){
 	if(popUp.length)
 		popUp.delay(300).animate(newDim, 200);
 }
+module.exports.changeModalSize = changeModalSize;
 
 function openBlackPopup(url, width, height, onCloseCallBack, iframeId, cssClass) {
 
@@ -351,6 +358,7 @@ function openBlackPopup(url, width, height, onCloseCallBack, iframeId, cssClass)
 	ndo.append("<div class='bwinPopupIframe_wrapper'><iframe id='" + iframeId + "' name='" + iframeId + "' frameborder='0'></iframe></div>");
 	ndo.find("iframe:first").prop("src", url).css({width:"100%", height:"100%", backgroundColor: isInIframe ? '#F9F9F9' : '#FFFFFF'});
 }
+module.exports.openBlackPopup = openBlackPopup;
 
 function getBlackPopup() {
 	var ret=$([]);
@@ -363,11 +371,12 @@ function getBlackPopup() {
 	}
 	return ret;
 }
-
+module.exports.getBlackPopup = getBlackPopup;
 
 function getBlackPopupOpener(){
   return getBlackPopup().data("__opener")
 }
+module.exports.getBlackPopupOpener = getBlackPopupOpener;
 
 function closeBlackPopup(callBackdata) {
 	//console.debug("closeBlackPopup ",callBackdata);
@@ -377,14 +386,15 @@ function closeBlackPopup(callBackdata) {
 		bp.data("callBackdata",callBackdata);
 	bp.trigger("close");
 }
+module.exports.closeBlackPopup = closeBlackPopup;
 
 function openPopUp(el,width,height){
 	var popup=createModalPopup(width,height);
 	popup.append(el.clone().show());
 }
+module.exports.openPopUp = openPopUp;
 
 //returns a jquery object where to write content
-
 function isIframe() {
 	var isIframe = false;
 	try{
@@ -397,13 +407,13 @@ function isIframe() {
 	}
 	return isIframe;
 };
-
+module.exports.isIframe = isIframe;
 
 function openBulkAction(bulkDivId){
 	var popup=createModalPopup(500,300);
 	popup.append($("#"+bulkDivId).clone().show());
 }
-
+module.exports.openBulkAction = openBulkAction;
 
 function refreshBulk(el) {
 	//console.debug("refreshBulk")
@@ -430,6 +440,7 @@ function refreshBulk(el) {
 		});
 	}
 }
+module.exports.refreshBulk = refreshBulk;
 
 function selUnselAll(el){
 	//var bulkCheckbox = $("#multi td [type='checkbox']");
@@ -444,3 +455,4 @@ function selUnselAll(el){
 
 	refreshBulk(el);
 }
+module.exports.selUnselAll = selUnselAll;

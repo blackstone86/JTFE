@@ -20,7 +20,7 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+ 
 function dateToRelative(localTime){
   var diff=new Date().getTime()-localTime;
   var ret="";

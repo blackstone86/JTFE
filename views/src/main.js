@@ -7,6 +7,7 @@ var container = $('#ganttwrap');
 // 甘特图配置
 var config = {
     target: container
+    ,key: 'teamworkGantDemo'
 }
 
 // 初始化甘特图
