@@ -103,6 +103,7 @@ function nearBestPosition(whereId, theObjId, centerOnEl) {
 		target.css("visibility", "visible");
 	}
 }
+module.exports.nearBestPosition = nearBestPosition;
 
 $.fn.keepItVisible = function (ref) {
 	var thisTop = $(this).offset().top;
