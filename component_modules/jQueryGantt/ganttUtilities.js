@@ -189,9 +189,6 @@ $.gridify = function (table, opt) {
   return box;
 };
 
-
-
-
 $.splittify = {
   init: function (where, first, second, perc) {
 
@@ -454,7 +451,8 @@ function resynchDates(leavingField, startField, startMilesField, durationField, 
   function resynchDatesSetFields(command) {
     //console.debug("resynchDatesSetFields",command);
     //var duration = parseInt(durationField.val());
-    var duration = daysFromString(durationField.val(), true);
+    var _date = require("./libs/date");
+    var duration = _date.daysFromString(durationField.val(), true);
     if (!duration || duration < 1)
       duration = 1;
 
