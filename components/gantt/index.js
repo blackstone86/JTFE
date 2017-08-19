@@ -110,10 +110,13 @@ GP.init = function(){
         return this;
     }
 
-    // 实例化甘特图，ganttMaster.js 用到 ge 实例
+    // 实例化甘特图，ganttMaster.js 用到 ge 实例对象
     window.ge = this.$gantt = new GanttMaster({
         resourceUrl: this.config.resourceUrl
     });
+
+    // Gantt 实例对象，供模板调用实例方法
+    window._ge = this;
 
     // 缓存模板
     this.tplCache();
@@ -398,7 +401,7 @@ GP.editResources = function(){
  */
 GP.destroy = function(){
     if (this.$gantt) {
-        this.$gantt = null;
+        window.ge = this.$gantt = null;
         // 清空容器html
         this.config.target.html("");
     }
