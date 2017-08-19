@@ -20,6 +20,7 @@
   OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+var layout = require("../../layout");
 
 jQuery.fn.dateField = function(options) {
   //console.debug("dateField",options);
@@ -107,7 +108,7 @@ jQuery.fn.dateField = function(options) {
   if (options.centerOnScreen){
     theDiv.oneTime(10,"ce",function(){$(this).centerOnScreen()});
   } else {
-    nearBestPosition(theOpener,theDiv);
+    layout.nearBestPosition(theOpener,theDiv);
   }
   theDiv.css("z-index",10000);
 
