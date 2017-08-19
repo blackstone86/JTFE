@@ -20,6 +20,9 @@
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+var dialog = require("./libs/dialogs");
+
 function GridEditor(master) {
   this.master = master; // is the a GantEditor instance
 
@@ -708,15 +711,15 @@ GridEditor.prototype.openFullEditor = function (task, editOnlyAssig) {
 
       if (self.master.endTransaction()) {
         taskEditor.find(":input").updateOldValue();
-        closeBlackPopup();
+        dialog.closeBlackPopup();
       }
 
     });
   }
 
   taskEditor.attr("alertonchange","true");
-  var ndo = createModalPopup(800, 450).append(taskEditor);//.append("<div style='height:800px; background-color:red;'></div>")
-  //var ndo = createModalPopup(800, 650).append("<div style='height:300px; background-color:red;'></div>")
+  var ndo = dialog.createModalPopup(800, 450).append(taskEditor);//.append("<div style='height:800px; background-color:red;'></div>")
+  //var ndo = dialog.createModalPopup(800, 650).append("<div style='height:300px; background-color:red;'></div>")
 
   //workload computation
   if (typeof(workloadDatesChanged)=="function")
