@@ -70,17 +70,20 @@ function canSubmitForm(formOrId) {
 		formOrId=$("#" + formOrId);
 	return formOrId.find(":input[required],:input[invalid=true]").isFullfilled();
 }
+module.exports.canSubmitForm = canSubmitForm;
 
 function showSavingMessage() {
 	$("#savingMessage:hidden").fadeIn();
 	$("body").addClass("waiting");
 	$(window).resize();
 }
+module.exports.showSavingMessage = showSavingMessage;
 function hideSavingMessage() {
 	$("#savingMessage:visible").fadeOut();
 	$("body").removeClass("waiting");
 	$(window).resize();
 }
+module.exports.hideSavingMessage = hideSavingMessage;
 
 
 
@@ -90,35 +93,42 @@ function isValidURL(url) {
 	var RegExp = /^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/;
 	return RegExp.test(url);
 }
+module.exports.isValidURL = isValidURL;
 
 function isValidEmail(email) {
 	//var RegExp = /^((([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/;
 	var RegExp = /^.+@\S+\.\S+$/;
 	return RegExp.test(email);
 }
+module.exports.isValidEmail = isValidEmail;
 
 function isValidInteger(n) {
 	reg = new RegExp("^[-+]{0,1}[0-9]*$");
 	return reg.test(n) || isNumericExpression(n);
 }
+module.exports.isValidInteger = isValidInteger;
 
 function isValidDouble(n) {
 	var sep = Number.decimalSeparator;
 	reg = new RegExp("^[-+]{0,1}[0-9]*[" + sep + "]{0,1}[0-9]*$");
 	return reg.test(n) || isNumericExpression(n);
 }
+module.exports.isValidDouble = isValidDouble;
 
 function isValidTime(n) {
 	return !isNaN(millisFromHourMinute(n));
 }
+module.exports.isValidTime = isValidTime;
 
 function isValidDurationDays(n) {
 	return !isNaN(daysFromString(n));
 }
+module.exports.isValidDurationDays = isValidDurationDays;
 
 function isValidDurationMillis(n) {
 	return !isNaN(millisFromString(n));
 }
+module.exports.isValidDurationMillis = isValidDurationMillis;
 
 function isNumericExpression(expr) {
 	try {
@@ -129,6 +139,7 @@ function isNumericExpression(expr) {
 	}
 
 }
+module.exports.isNumericExpression = isNumericExpression;
 
 function getNumericExpression(expr) {
 	var ret;
@@ -141,6 +152,7 @@ function getNumericExpression(expr) {
 	return ret;
 
 }
+module.exports.getNumericExpression = getNumericExpression;
 
 /*
  supports almost all Java currency format e.g.: ###,##0.00EUR   €#,###.00  #,###.00€  -$#,###.00  $-#,###.00
@@ -201,6 +213,7 @@ function isValidCurrency(numStr) {
 	var rg = new RegExp(regex);
 	return rg.test(numStr) || isNumericExpression(numStr);
 }
+module.exports.isValidCurrency = isValidCurrency;
 
 function getCurrencyValue(numStr) {
 	if (!isValidCurrency(numStr))
@@ -209,12 +222,13 @@ function getCurrencyValue(numStr) {
 	var ripul = numStr.replaceAll(Number.groupingSeparator, "").replaceAll(Number.decimalSeparator, ".");
 	return getNumericExpression(ripul) || parseFloat(ripul.replace(/[^-0123456789.]/, ""));
 }
+module.exports.getCurrencyValue = getCurrencyValue;
 
 
 function formatCurrency(numberString) {
 	return formatNumber(numberString, Number.currencyFormat);
 }
-
+module.exports.formatCurrency = formatCurrency;
 
 function formatNumber(numberString, format) {
 	if (!format)
@@ -373,6 +387,7 @@ function formatNumber(numberString, format) {
 	returnString = prefix + returnString + suffix;
 	return returnString;
 }
+module.exports.formatNumber = formatNumber;
 
 
 //validation functions - used by textfield and datefield
@@ -522,6 +537,7 @@ function saveFormValues(idForm) {
 		}
 	}
 }
+module.exports.saveFormValues = saveFormValues;
 
 function restoreFormValues(idForm) {
 	var formx = obj(idForm);
@@ -534,6 +550,7 @@ function restoreFormValues(idForm) {
 		}
 	}
 }
+module.exports.restoreFormValues = restoreFormValues;
 
 function changeActionAndSubmit(action,command){
 	var f=$("form:first");
@@ -541,6 +558,7 @@ function changeActionAndSubmit(action,command){
 	f.find("[name=CM]").val(command);
 	f.submit();
 }
+module.exports.changeActionAndSubmit = changeActionAndSubmit;
 
 
 
@@ -558,10 +576,10 @@ function limitSize(ob) {
 	}
 	return true;
 }
+module.exports.limitSize = limitSize;
 
 
 // verify before unload BEGIN ----------------------------------------------------------------------------
-
 function alertOnUnload(container) {
   //console.debug("alertOnUnload",container,muteAlertOnChange);
   if (!muteAlertOnChange) {
@@ -592,6 +610,7 @@ function alertOnUnload(container) {
   }
   return undefined;
 }
+module.exports.alertOnUnload = alertOnUnload;
 
 function canILeave(){
 	var ret = window.onbeforeunload();
@@ -600,6 +619,7 @@ function canILeave(){
 	else
 		return true;
 }
+module.exports.canILeave = canILeave;
 
 // ---------------------------------- oldvalues management
 // update all values selected
@@ -648,8 +668,6 @@ jQuery.fn.fillJsonWithInputValues = function (jsonObject) {
   return this;
 };
 
-
-
 function enlargeTextArea(immediate) {
   //console.debug("enlargeTextArea",immediate);
 	var el = $(this);
@@ -688,3 +706,4 @@ function enlargeTextArea(immediate) {
 	});
 
 }
+module.exports.enlargeTextArea = enlargeTextArea;
