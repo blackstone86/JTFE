@@ -1,48 +1,41 @@
 // 初始化数据
-var data = require("./data");
-
+var data    = require("./data");
 // 本地缓存封装对象
-var ls = require("../storage");
-
+var ls      = require("../storage");
 // 公共模块
-var common = require("../common");
-
+var common  = require("../common");
 // 国际化
 var seti18n = require("./i18n");
-
 // 引入甘特图库
-require("../../component_modules/jQueryGantt/libs/jquery/jquery.livequery.1.1.1.min");
-require("../../component_modules/jQueryGantt/libs/jquery/jquery.timers");
-require("../../component_modules/jQueryGantt/libs/jquery/dateField/jquery.dateField");
-require("../../component_modules/jQueryGantt/libs/jquery/JST/jquery.JST");
-require("../../component_modules/jQueryGantt/libs/jquery/svg/jquery.svg.min");
-require("../../component_modules/jQueryGantt/libs/jquery/svg/jquery.svgdom.1.8");
-require("../../component_modules/jQueryGantt/libs/jquery/JST/jquery.JST");
-require("../../component_modules/jQueryGantt/libs/utilities");
-require("../../component_modules/jQueryGantt/libs/forms");
-require("../../component_modules/jQueryGantt/libs/date");
-var dialog = require("../../component_modules/jQueryGantt/libs/dialogs");
-require("../../component_modules/jQueryGantt/libs/layout");
-require("../../component_modules/jQueryGantt/libs/layout");
-require("../../component_modules/jQueryGantt/libs/i18nJs");
-require("../../component_modules/jQueryGantt/ganttUtilities");
-require("../../component_modules/jQueryGantt/ganttTask");
-require("../../component_modules/jQueryGantt/ganttDrawerSVG");
-require("../../component_modules/jQueryGantt/ganttGridEditor");
-require("../../component_modules/jQueryGantt/ganttMaster");
-
+var livequery       = require("../../component_modules/jQueryGantt/libs/jquery/jquery.livequery.1.1.1.min");
+var timers          = require("../../component_modules/jQueryGantt/libs/jquery/jquery.timers");
+var dateField       = require("../../component_modules/jQueryGantt/libs/jquery/dateField/jquery.dateField");
+var JST             = require("../../component_modules/jQueryGantt/libs/jquery/JST/jquery.JST");
+var svg             = require("../../component_modules/jQueryGantt/libs/jquery/svg/jquery.svg.min");
+var svgdom          = require("../../component_modules/jQueryGantt/libs/jquery/svg/jquery.svgdom.1.8");
+var utilities       = require("../../component_modules/jQueryGantt/libs/utilities");
+var forms           = require("../../component_modules/jQueryGantt/libs/forms");
+var date            = require("../../component_modules/jQueryGantt/libs/date");
+var dialog          = require("../../component_modules/jQueryGantt/libs/dialogs");
+var layout          = require("../../component_modules/jQueryGantt/libs/layout");
+var i18nJs          = require("../../component_modules/jQueryGantt/libs/i18nJs");
+var ganttUtilities  = require("../../component_modules/jQueryGantt/ganttUtilities");
+var ganttTask       = require("../../component_modules/jQueryGantt/ganttTask");
+var ganttDrawerSVG  = require("../../component_modules/jQueryGantt/ganttDrawerSVG");
+var ganttGridEditor = require("../../component_modules/jQueryGantt/ganttGridEditor");
+var ganttMaster     = require("../../component_modules/jQueryGantt/ganttMaster");
 // 注册模板
 var _tpls = {
-    "assignment_row": require("./tpls/assignment_row.tpl")
-    ,"change_status": require("./tpls/change_status.tpl")
-    ,"gantbuttons": require("./tpls/gantbuttons.tpl")
+    "assignment_row"  : require("./tpls/assignment_row.tpl")
+    ,"change_status"  : require("./tpls/change_status.tpl")
+    ,"gantbuttons"    : require("./tpls/gantbuttons.tpl")
     ,"resource_editor": require("./tpls/resource_editor.tpl")
-    ,"resource_row": require("./tpls/resource_row.tpl")
-    ,"task_editor": require("./tpls/task_editor.tpl")
-    ,"taskbar": require("./tpls/taskbar.tpl")
-    ,"taskemptyrow": require("./tpls/taskemptyrow.tpl")
-    ,"taskrow": require("./tpls/taskrow.tpl")
-    ,"tasksedithead": require("./tpls/tasksedithead.tpl")
+    ,"resource_row"   : require("./tpls/resource_row.tpl")
+    ,"task_editor"    : require("./tpls/task_editor.tpl")
+    ,"taskbar"        : require("./tpls/taskbar.tpl")
+    ,"taskemptyrow"   : require("./tpls/taskemptyrow.tpl")
+    ,"taskrow"        : require("./tpls/taskrow.tpl")
+    ,"tasksedithead"  : require("./tpls/tasksedithead.tpl")
 };
 
 /**
@@ -172,7 +165,10 @@ GP.tplCache = function(){
                 .split("#)").join("p.push('")
                 + "');}return p.join('');";
             try {
-                $.JST._templates[_name] = new Function("obj", strFunc);
+                $.JST._templates[_name] = function(obj){
+                    var fn = new Function("obj","date",strFunc);
+                    return fn(obj,date);
+                }
             } catch (e) {
                 console.error("JST error: " + _name);
             }
