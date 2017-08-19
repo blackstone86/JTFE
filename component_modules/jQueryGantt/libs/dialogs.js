@@ -20,6 +20,8 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+var forms = require("./forms");
+
 function centerPopup(url, target, w, h, scroll, resiz) {
 	var winl = (screen.width - w) / 2;
 	var wint = (screen.height - h) / 2;
@@ -284,7 +286,7 @@ function createModalPopup(width, height, onCloseCallBack, cssClass, element, pop
         alertMsg = ifr.get(0).contentWindow.alertOnUnload();
       }catch (e){}
     } else {
-      alertMsg=alertOnUnload(ndo);
+      alertMsg=forms.alertOnUnload(ndo);
     }
 
     if (alertMsg){
