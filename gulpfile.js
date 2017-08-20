@@ -23,6 +23,7 @@ var b = watchify(browserify(opts));
 
 // 在这里加入变换操作
 // 比如： b.transform(coffeeify);
+b.transform('browserify-css', {global: true});
 
 gulp.task('js', bundle); // 这样你就可以运行 `gulp js` 来编译文件了
 b.on('update', bundle); // 当任何依赖发生改变的时候，运行打包工具
@@ -37,7 +38,7 @@ function bundle() {
     .pipe(buffer())
     // 可选项，如果你不需要 sourcemaps，就删除
     .pipe(sourcemaps.init({loadMaps: true})) // 从 browserify 文件载入 map
-       // 在这里将变换操作加入管道
+    // 在这里将变换操作加入管道
     .pipe(sourcemaps.write('./')) // 写入 .map 文件
     .pipe(gulp.dest('./dist'));
 }
