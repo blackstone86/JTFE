@@ -8,6 +8,8 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
 // 在这里添加自定义 browserify 选项
 var customOpts = {
@@ -45,3 +47,20 @@ function bundle() {
 
 // 打包js
 gulp.task('default', ['js'], function(){});
+
+// 监视文件改动并重新载入
+gulp.task('serve', function() {
+  browserSync({
+    server: {
+      // 服务器根目录
+      baseDir: './'
+      // 指定入口页
+      ,index: "views/index.html"
+    }
+  });
+
+  gulp.watch(['./dist/**',"./views/**"], {
+    // 服务器根目录
+    cwd: './'
+  }, reload);
+});
