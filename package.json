@@ -26,5 +26,8 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
-  "browserify-css": "./config/browserify-css.js"
+  "browserify-css": "./config/browserify-css.js",
+  "engines": {
+      "node": ">=6.10.3"
+  }
 }
