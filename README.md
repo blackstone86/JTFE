@@ -32,6 +32,7 @@
 ├── views
 ├── .bowerrc
 ├── .gitignore
+├── .nvmrc
 ├── bower.json
 ├── gulpfile.js
 └── package.json
@@ -46,6 +47,7 @@
 - `views目录` 静态资源目录
 - `.bowerrc` bower配置文件
 - `.gitignore` 忽略提交文件配置文件
+- `.nvmrc` nvm 项目使用 nodeJS 版本配置文件
 - `bower.json` bower工程描述文件
 - `gulpfile.js` gulp打包脚本文件
 - `package.json` node工程描述文件
