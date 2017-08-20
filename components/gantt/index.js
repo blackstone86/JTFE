@@ -55,6 +55,8 @@ var DEFAULT_SET = {
     ,language: "zh-CN"
     // 资源路径
     ,resourceUrl: "../components/gantt/imgs/"
+    // 组件类样式名
+    ,class: "M-gantt"
 }
 
 /**
@@ -108,6 +110,12 @@ GP.init = function(){
         return this;
     }
 
+    // 缓存组件容器
+    var target = this.config.target;
+
+    // 添加组件样式
+    target.addClass(this.config.class);
+
     // 实例化甘特图，ganttMaster.js 用到 ge 实例对象
     window.ge = this.$gantt = new GanttMaster({
         resourceUrl: this.config.resourceUrl
@@ -120,7 +128,7 @@ GP.init = function(){
     this.tplCache();
 
     // 甘特图初始化
-    this.$gantt.init(this.config.target);
+    this.$gantt.init(target);
 
     // 任务关闭后进度设置为100%
     this.$gantt.set100OnClose = true;
