@@ -1,6 +1,6 @@
 module.exports = {
     // 根目录 用于计算绝对路径 默认 "./"
-    "rootDir": "./",
+    "rootDir": "./views",
     // 是否 自动注入内联样式 默认 true
     "autoInject": true,
     // 自动注入样式配置项
