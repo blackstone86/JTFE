@@ -1,3 +1,8 @@
+// 引入样式
+require("../../component_modules/jQueryGantt/libs/jquery/dateField/jquery.dateField.css");
+require("./css/platform.css");
+require("./css/gantt.css");
+require("./css/index.css");
 // 初始化数据
 var data    = require("./data");
 // 本地缓存封装对象
