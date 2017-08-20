@@ -11,7 +11,7 @@ module.exports = {
         "insertAt": "bottom"
     },
     // 是否 压缩 默认 false
-    "minify": false,
+    "minify": true,
     // CleanCSS 配置 默认 {}
     "minifyOptions": {},
     // 是否 转base64格式 默认 false
