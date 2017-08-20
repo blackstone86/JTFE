@@ -4,6 +4,9 @@
   "description": "gantt demo",
   "main": "main.js",
   "scripts": {
+    "prod": "gulp",
+    "dev": "gulp --env dev",
+    "serve": "gulp serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "authors": [
@@ -18,6 +21,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
     "lodash.assign": "^4.2.0",
+    "minimist": "^1.2.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
