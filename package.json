@@ -17,7 +17,10 @@
     "browser-sync": "^2.18.13",
     "browserify": "^14.4.0",
     "browserify-css": "^0.11.1",
+    "event-stream": "^3.3.4",
+    "glob": "^7.1.2",
     "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
     "lodash.assign": "^4.2.0",
@@ -28,6 +31,6 @@
   },
   "browserify-css": "./config/browserify-css.js",
   "engines": {
-      "node": ">=6.10.3"
+    "node": ">=6.10.3"
   }
 }
