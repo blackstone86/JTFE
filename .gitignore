@@ -6,3 +6,7 @@ node_modules/
 
 # project
 dist/
+component_modules/bootstrap
+component_modules/jquery
+component_modules/jQuery-menu-aim
+component_modules/jquery-ui
