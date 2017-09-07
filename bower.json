@@ -24,6 +24,8 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "jQueryGantt": "robicch/jQueryGantt",
-    "jquery-ui": "^1.12.1"
+    "jquery-ui": "^1.12.1",
+    "bootstrap": "^3.3.7",
+    "jQuery-menu-aim": "*"
   }
 }
