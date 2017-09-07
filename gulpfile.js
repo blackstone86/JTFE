@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require("path");
 var watchify = require('watchify');
 var browserify = require('browserify');
 var gulp = require('gulp');
@@ -10,8 +11,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
 var minimist = require('minimist');
 var browserSync = require('browser-sync');
+var glob = require('glob');
+var es = require('event-stream');
+var rename = require('gulp-rename');
 var reload = browserSync.reload;
-
 // 外部传参封装 eg: gulp --env prod
 var knownOptions = {
   string: 'env',
@@ -20,30 +23,14 @@ var knownOptions = {
 var options = minimist(process.argv.slice(2), knownOptions);
 var isProd = options.env === 'prod';
 
-// 在这里添加自定义 browserify 选项
-var customOpts = {
-  entries: 
-  [
-      './components/boot/index.js'
-      ,'./views/src/main.js'
-  ]
-  ,debug: true
-};
-var opts = assign({}, watchify.args, customOpts);
-var b = isProd ? browserify(opts) : watchify(browserify(opts)); 
-
-// 在这里加入变换操作
-b.transform('browserify-css', {global: true});
-
-gulp.task('build', bundle); // 运行 `gulp pack` 编译文件
-b.on('update', bundle); // 当任何依赖发生改变的时候，运行打包工具
-b.on('log', gutil.log); // 输出编译日志到终端
-
-function bundle() {
-  return b.bundle()
+function bundle(){
+  return this.b.bundle()
     // 如果有错误发生，记录这些错误
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    .pipe(source('bundle.js'))
+    .pipe(source(this.entry))
+    .pipe(rename({
+        extname: '.bundle.js'
+    }))
     // 可选项，如果你不需要缓存文件内容，就删除
     .pipe(buffer())
     // 可选项，如果你不需要 sourcemaps，就删除
@@ -53,8 +40,32 @@ function bundle() {
     .pipe(gulp.dest('./dist'));
 }
 
+function bundles() {
+  glob('./views/src/**.js', function(err, files) {
+      var boot = './components/boot/index.js';
+      var tasks = files.map(function(entry) {
+          var customOpts = { entries: [boot, entry] }
+          var opts = assign({}, watchify.args, customOpts);
+          var b = isProd ? browserify(opts) : watchify(browserify(opts));
+          b.transform('browserify-css', {global: true});
+          var bundleFn = bundle.bind(
+            {
+              "b": b, 
+              "entry": path.basename(entry)
+            }
+          );
+          // 当任何依赖发生改变的时候，运行打包工具
+          b.on('update', bundleFn);
+          // 输出编译日志到终端
+          b.on('log', gutil.log);
+          return bundleFn();
+      });
+      es.merge(tasks).on('end', function(){});
+  })
+}
+
 // 编译项目
-gulp.task('default', ['build'], function(){});
+gulp.task('default', bundles);
 
 // 监视文件改动并重新载入
 gulp.task('serve', function() {
@@ -63,7 +74,7 @@ gulp.task('serve', function() {
       // 服务器根目录
       baseDir: './'
       // 指定入口页
-      ,index: "views/index.html"
+      ,index: "views/gantt.html"
     }
   });
 
