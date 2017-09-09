@@ -14,6 +14,8 @@ let browserSync = require('browser-sync');
 let glob = require('glob');
 let es = require('event-stream');
 let rename = require('gulp-rename');
+let LessPluginAutoPrefix = require('less-plugin-autoprefix');
+let autoprefix= new LessPluginAutoPrefix({ browsers: ["last 2 versions"] });
 let util = require('./gulp_util.js');
 let config = require('./gulp_config.js');
 let outputDir = config.outputDir;
@@ -65,7 +67,14 @@ function bundles() {
           let customOpts = { entries: [boot, entry] }
           let opts = assign({}, watchify.args, customOpts);
           let b = isProd ? browserify(opts) : watchify(browserify(opts));
-          b.transform('browserify-css', {global: true});          
+          // b.transform('browserify-css', {global: true});
+          let opt = {
+            compileOptions: {
+              compress: true,
+              plugins: [autoprefix]
+            }
+          };
+          b.transform('node-lessify', opt);
           let bundleFn = bundle.bind(
             {
               "b": b,
