@@ -11,4 +11,4 @@ var config = {
 }
 
 // 初始化甘特图
-// var gantt = new Gantt(config);
+var gantt = new Gantt(config);
