@@ -32,6 +32,12 @@ let knownOptions = {
 };
 let options = minimist(process.argv.slice(2), knownOptions);
 let isProd = options.env === 'prod';
+// 除去js捆绑文件
+var ignorejsbundle = [
+  "!./views/**/*.js",
+  "!./views/**/*.less",
+  "!./views/**/*.css"
+];
 // 任务列表
 var tasks = ["transfer", "bundles", "serve"];
 isProd && tasks.pop();
@@ -39,6 +45,14 @@ isProd && tasks.pop();
 // 迁移所有源码
 function transfer(){
   let stream = gulp.src(["./views/**/*"].concat(ignoreFilesPattens))
+  .pipe(gulp.dest(outputDir))
+  .pipe(reload({ stream:true }));
+  return stream;
+}
+
+// 迁移非js捆绑文件
+function transfer_reload(){
+  let stream = gulp.src(["./views/**"].concat(ignorejsbundle))
   .pipe(gulp.dest(outputDir))
   .pipe(reload({ stream:true }));
   return stream;
@@ -103,18 +117,14 @@ function serve() {
       ,index: "index.html"
     }
   });
-
-  // 排除监听js
-  var ignoreFilesPattens = [
-    "!./views/**/*.js",
-    "!./views/**/*.less",
-    "!./views/**/*.css"
-  ];
-  gulp.watch(["./views/**"].concat(ignoreFilesPattens), ['transfer']);
+  gulp.watch(["./views/**"].concat(ignorejsbundle), ['transfer_reload']);
 }
 
 // 迁移资源
 gulp.task('transfer', transfer);
+
+// 迁移非js捆绑文件
+gulp.task('transfer_reload', transfer_reload);
 
 // 编译项目
 gulp.task('bundles', bundles);
