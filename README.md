@@ -15,9 +15,9 @@
     git clone https://github.com/blackstone86/JTFE.git
     ```
 
-1. 在当前终端/命令行窗口，使用 `npm run dev` 构建项目，监听脚本变更，浏览器自动刷新
+1. 在当前终端/命令行窗口，使用 `npm run dev` 构建项目，监听`views`目录变更，浏览器自动刷新
 
-> 注：使用 `npm run prod` 构建项目
+> 注：使用 `npm run prod` **仅**构建项目
 
 1. 浏览项目效果 http://localhost:3000
 
