@@ -33,13 +33,13 @@ let knownOptions = {
 let options = minimist(process.argv.slice(2), knownOptions);
 let isProd = options.env === 'prod';
 // 除去js捆绑文件
-var ignorejsbundle = [
+let ignorejsbundle = [
   "!./views/**/*.js",
   "!./views/**/*.less",
   "!./views/**/*.css"
 ];
 // 任务列表
-var tasks = ["transfer", "bundles", "serve"];
+let tasks = ["transfer", "bundles", "serve"];
 isProd && tasks.pop();
 
 // 迁移所有源码
