@@ -39,8 +39,9 @@ isProd && tasks.pop();
 // 迁移所有源码
 function transfer(){
   let stream = gulp.src(["./views/**/*"].concat(ignoreFilesPattens))
-  .pipe(gulp.dest(outputDir));
-  return stream; 
+  .pipe(gulp.dest(outputDir))
+  .pipe(reload({ stream:true }));
+  return stream;
 }
 
 function bundle(){
@@ -102,6 +103,14 @@ function serve() {
       ,index: "index.html"
     }
   });
+
+  // 排除监听js
+  var ignoreFilesPattens = [
+    "!./views/**/*.js",
+    "!./views/**/*.less",
+    "!./views/**/*.css"
+  ];
+  gulp.watch(["./views/**"].concat(ignoreFilesPattens), ['transfer']);
 }
 
 // 迁移资源
