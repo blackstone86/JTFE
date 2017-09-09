@@ -23,13 +23,16 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
+    "less-plugin-autoprefix": "^1.5.1",
     "lodash.assign": "^4.2.0",
     "minimist": "^1.2.0",
+    "node-lessify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
   "browserify-css": "./config/browserify-css.js",
+  "browserify": "./config/browserify.js",
   "engines": {
     "node": ">=6.10.3"
   }
