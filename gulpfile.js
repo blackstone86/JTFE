@@ -1,34 +1,40 @@
 'use strict';
 
-var path = require("path");
-var watchify = require('watchify');
-var browserify = require('browserify');
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
-var assign = require('lodash.assign');
-var minimist = require('minimist');
-var browserSync = require('browser-sync');
-var glob = require('glob');
-var es = require('event-stream');
-var rename = require('gulp-rename');
-var util = require('./gulp_util.js');
-var config = require('./gulp_config.js');
-var outputDir = config.outputDir;
-var ignoreFilesPattens = util.getIgnoreFiles(config.ignoreFilesPatterns);
-var reload = browserSync.reload;
+let path = require("path");
+let watchify = require('watchify');
+let browserify = require('browserify');
+let gulp = require('gulp');
+let source = require('vinyl-source-stream');
+let buffer = require('vinyl-buffer');
+let gutil = require('gulp-util');
+let sourcemaps = require('gulp-sourcemaps');
+let assign = require('lodash.assign');
+let minimist = require('minimist');
+let browserSync = require('browser-sync');
+let glob = require('glob');
+let es = require('event-stream');
+let rename = require('gulp-rename');
+let util = require('./gulp_util.js');
+let config = require('./gulp_config.js');
+let outputDir = config.outputDir;
+let view = config.currview;
+// 当前视图根目录
+let viewDir = outputDir + "/" + view;
+let ignoreFilesPattens = util.getIgnoreFiles(config.ignoreFilesPatterns);
+let reload = browserSync.reload;
 // 外部传参封装 eg: gulp --env prod
-var knownOptions = {
+let knownOptions = {
   string: 'env',
   default: { env: process.env.NODE_ENV || 'prod' }
 };
-var options = minimist(process.argv.slice(2), knownOptions);
-var isProd = options.env === 'prod';
+let options = minimist(process.argv.slice(2), knownOptions);
+let isProd = options.env === 'prod';
+// 任务列表
+var tasks = ["transfer", "bundles", "serve"];
+isProd && tasks.pop();
 
 // 迁移所有源码
-function transfer_views(){
+function transfer(){
   let stream = gulp.src(["./views/**/*"].concat(ignoreFilesPattens))
   .pipe(gulp.dest(outputDir));
   return stream; 
@@ -48,18 +54,19 @@ function bundle(){
     .pipe(sourcemaps.init({loadMaps: true})) // 从 browserify 文件载入 map
     // 在这里将变换操作加入管道
     .pipe(sourcemaps.write('./')) // 写入 .map 文件
-    .pipe(gulp.dest(outputDir));
+    .pipe(gulp.dest(outputDir))
+    .on('end', reload);
 }
 
 function bundles() {
   glob('./views/**/*.js', function(err, files) {
-      var boot = './components/boot/index.js';
-      var tasks = files.map(function(entry) {
-          var customOpts = { entries: [boot, entry] }
-          var opts = assign({}, watchify.args, customOpts);
-          var b = isProd ? browserify(opts) : watchify(browserify(opts));
+      let boot = './components/boot/index.js';
+      let tasks = files.map(function(entry) {
+          let customOpts = { entries: [boot, entry] }
+          let opts = assign({}, watchify.args, customOpts);
+          let b = isProd ? browserify(opts) : watchify(browserify(opts));
           b.transform('browserify-css', {global: true});          
-          var bundleFn = bundle.bind(
+          let bundleFn = bundle.bind(
             {
               "b": b,
               "entry": entry.replace("./views/", '') // path.basename(entry)
@@ -75,18 +82,8 @@ function bundles() {
   })
 }
 
-// 迁移资源
-gulp.task('transfer', transfer_views)
-
-// 编译项目
-gulp.task('default', ["transfer"], bundles);
-
-// 当前视图
-var view = "gantt";
-// 当前视图根目录
-var viewDir = outputDir + "/" + view;
-// 监视文件改动并重新载入
-gulp.task('serve', function() {
+// 启动服务器
+function serve() {
   browserSync({
     server: {
       // 服务器根目录
@@ -95,9 +92,16 @@ gulp.task('serve', function() {
       ,index: "index.html"
     }
   });
+}
 
-  gulp.watch(['./public/**',"./views/**"], {
-    // 服务器根目录
-    cwd: './'
-  }, reload);
-});
+// 迁移资源
+gulp.task('transfer', transfer);
+
+// 编译项目
+gulp.task('bundles', bundles);
+
+// 启动服务器
+gulp.task('serve', serve);
+
+// 主任务
+gulp.task('default', tasks);
