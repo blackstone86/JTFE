@@ -14,6 +14,7 @@ let browserSync = require('browser-sync');
 let glob = require('glob');
 let es = require('event-stream');
 let rename = require('gulp-rename');
+let gulpif = require('gulp-if');
 let LessPluginAutoPrefix = require('less-plugin-autoprefix');
 let autoprefix= new LessPluginAutoPrefix({ browsers: ["last 2 versions"] });
 let util = require('./gulp_util.js');
@@ -53,9 +54,9 @@ function bundle(){
     // 可选项，如果你不需要缓存文件内容，就删除
     .pipe(buffer())
     // 可选项，如果你不需要 sourcemaps，就删除
-    .pipe(sourcemaps.init({loadMaps: true})) // 从 browserify 文件载入 map
+    .pipe(gulpif(!isProd, sourcemaps.init({loadMaps: true}))) // 从 browserify 文件载入 map
     // 在这里将变换操作加入管道
-    .pipe(sourcemaps.write('./')) // 写入 .map 文件
+    .pipe(gulpif(!isProd, sourcemaps.write('./'))) // 写入 .map 文件
     .pipe(gulp.dest(outputDir))
     .on('end', reload);
 }
