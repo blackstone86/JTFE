@@ -24,3 +24,7 @@ exports.ignoreFilesPatterns = ignoreFilesPatterns;
 // 迁移但不处理的文件夹
 let nocompressDirs = [];
 exports.nocompressDirs = nocompressDirs;
+
+// 当前浏览视图
+let currview = "gantt";
+exports.currview = currview;
