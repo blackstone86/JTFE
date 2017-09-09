@@ -5,7 +5,7 @@ node_modules/
 .vscode
 
 # project
-dist/
+public/
 component_modules/bootstrap
 component_modules/jquery
 component_modules/jQuery-menu-aim

@@ -14,6 +14,10 @@ var browserSync = require('browser-sync');
 var glob = require('glob');
 var es = require('event-stream');
 var rename = require('gulp-rename');
+var util = require('./gulp_util.js');
+var config = require('./gulp_config.js');
+var outputDir = config.outputDir;
+var ignoreFilesPattens = util.getIgnoreFiles(config.ignoreFilesPatterns);
 var reload = browserSync.reload;
 // 外部传参封装 eg: gulp --env prod
 var knownOptions = {
@@ -23,35 +27,42 @@ var knownOptions = {
 var options = minimist(process.argv.slice(2), knownOptions);
 var isProd = options.env === 'prod';
 
+// 迁移所有源码
+function transfer_views(){
+  let stream = gulp.src(["./views/**/*"].concat(ignoreFilesPattens))
+  .pipe(gulp.dest(outputDir));
+  return stream; 
+}
+
 function bundle(){
   return this.b.bundle()
     // 如果有错误发生，记录这些错误
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source(this.entry))
-    .pipe(rename({
-        extname: '.bundle.js'
-    }))
+    // .pipe(rename({
+    //     extname: '.bundle.js'
+    // }))
     // 可选项，如果你不需要缓存文件内容，就删除
     .pipe(buffer())
     // 可选项，如果你不需要 sourcemaps，就删除
     .pipe(sourcemaps.init({loadMaps: true})) // 从 browserify 文件载入 map
     // 在这里将变换操作加入管道
     .pipe(sourcemaps.write('./')) // 写入 .map 文件
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest(outputDir));
 }
 
 function bundles() {
-  glob('./views/src/**.js', function(err, files) {
+  glob('./views/**/*.js', function(err, files) {
       var boot = './components/boot/index.js';
       var tasks = files.map(function(entry) {
           var customOpts = { entries: [boot, entry] }
           var opts = assign({}, watchify.args, customOpts);
           var b = isProd ? browserify(opts) : watchify(browserify(opts));
-          b.transform('browserify-css', {global: true});
+          b.transform('browserify-css', {global: true});          
           var bundleFn = bundle.bind(
             {
-              "b": b, 
-              "entry": path.basename(entry)
+              "b": b,
+              "entry": entry.replace("./views/", '') // path.basename(entry)
             }
           );
           // 当任何依赖发生改变的时候，运行打包工具
@@ -64,21 +75,28 @@ function bundles() {
   })
 }
 
-// 编译项目
-gulp.task('default', bundles);
+// 迁移资源
+gulp.task('transfer', transfer_views)
 
+// 编译项目
+gulp.task('default', ["transfer"], bundles);
+
+// 当前视图
+var view = "gantt";
+// 当前视图根目录
+var viewDir = outputDir + "/" + view;
 // 监视文件改动并重新载入
 gulp.task('serve', function() {
   browserSync({
     server: {
       // 服务器根目录
-      baseDir: './'
+      baseDir: viewDir
       // 指定入口页
-      ,index: "views/gantt.html"
+      ,index: "index.html"
     }
   });
 
-  gulp.watch(['./dist/*.js',"./views/*.html"], {
+  gulp.watch(['./public/**',"./views/**"], {
     // 服务器根目录
     cwd: './'
   }, reload);
