@@ -18,6 +18,9 @@ exports.excludeDirs = excludeDirs;
 // 不迁移的文件
 let ignoreFilesPatterns = [
     "**/*.js"
+    ,"**/*.css"
+    ,"**/*.less"
+    ,"**/*.sass"
 ];
 exports.ignoreFilesPatterns = ignoreFilesPatterns;
 
@@ -26,5 +29,5 @@ let nocompressDirs = [];
 exports.nocompressDirs = nocompressDirs;
 
 // 当前浏览视图
-let currview = "gantt";
+let currview = "menu";
 exports.currview = currview;
