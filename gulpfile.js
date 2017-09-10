@@ -88,7 +88,7 @@ function ejs2html(isreload){
       )
       .on('error', gutil.log)
       .pipe(gulp.dest(function(file){
-        var viewname = path.basename(path.dirname(file.path));
+        let viewname = path.basename(path.dirname(file.path));
         return outputDir + '/' + viewname;
       }));
       return stream;
