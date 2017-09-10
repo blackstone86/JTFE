@@ -28,6 +28,17 @@ exports.ignoreFilesPatterns = ignoreFilesPatterns;
 let nocompressDirs = [];
 exports.nocompressDirs = nocompressDirs;
 
+// 迁移资源内容（文件夹、文件）
+let transfesrc = 
+[
+    "./components/common/**",
+    "!./components/common/**/*.less",
+    "!./components/common/**/*.sass",
+    "!./components/common/**/*.js",
+];
+exports.transfesrc = transfesrc;
+
 // 当前浏览视图
-let currview = "menu";
+// let currview = "aimenu";
+let currview = "icon";
 exports.currview = currview;
