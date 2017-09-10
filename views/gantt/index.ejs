@@ -8,6 +8,8 @@
 </head>
 <body>
     <div id="ganttwrap"></div>
-    <script src="src/gantt.js"></script>
+    <% if (entrance_script) { %>
+        <script src="<%= entrance_script %>"></script>
+    <% } %>
 </body>
 </html>

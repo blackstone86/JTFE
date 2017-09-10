@@ -114,6 +114,8 @@
         <h1>jQuery-menu-aim example</h1>
         <p>Click "Explore the Monkeys" above to start playing around w/ the dropdown. View source and search for "jQuery-menu-aim" to find all the integration points for this example.</p>
     </div>
-    <script src="src/menu.js"></script>
+    <% if (entrance_script) { %>
+        <script src="<%= entrance_script %>"></script>
+    <% } %>
 </body>
 </html>

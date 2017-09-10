@@ -21,6 +21,7 @@ let ignoreFilesPatterns = [
     ,"**/*.css"
     ,"**/*.less"
     ,"**/*.sass"
+    ,"**/*.ejs"
 ];
 exports.ignoreFilesPatterns = ignoreFilesPatterns;
 
