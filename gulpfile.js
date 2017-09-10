@@ -20,6 +20,7 @@ let autoprefix= new LessPluginAutoPrefix({ browsers: ["last 2 versions"] });
 let util = require('./gulp_util.js');
 let config = require('./gulp_config.js');
 let outputDir = config.outputDir;
+var transfesrc = config.transfesrc;
 let view = config.currview;
 // 当前视图根目录
 let viewDir = outputDir + "/" + view;
@@ -42,14 +43,21 @@ let ignorejsbundle = [
 let tasks = ["transfer", "bundles", "serve"];
 isProd && tasks.pop();
 
-// 迁移所有源码
+// 迁移资源
+function transferes(){
+  let stream = gulp.src(transfesrc)
+  .pipe(gulp.dest(outputDir+"/res"));
+  return stream;
+}
+
+// 迁移views文件夹所有文件
 function transfer(){
   let stream = gulp.src(["./views/**"].concat(ignoreFilesPattens))
   .pipe(gulp.dest(outputDir));
   return stream;
 }
 
-// 迁移非js捆绑文件
+// 迁移views文件夹所有文件（除js捆绑文件）
 function transfer_reload(){
   let stream = gulp.src(["./views/**"].concat(ignorejsbundle))
   .pipe(gulp.dest(outputDir))
@@ -108,23 +116,26 @@ function bundles() {
 
 // 启动服务器
 function serve() {
-  browserSync({
-    server: {
-      // 服务器根目录
-      baseDir: viewDir
-      // 指定入口页
-      ,index: "index.html"
-    }
-  });
   setTimeout(function(){
+    browserSync({
+      server: {
+        // 服务器根目录
+        baseDir: viewDir
+        // 指定入口页
+        ,index: "index.html"
+      }
+    });
     gulp.watch(["./views/**"].concat(ignorejsbundle), ['transfer_reload']);
   }, 1000);
 }
 
 // 迁移资源
-gulp.task('transfer', transfer);
+gulp.task('transferes', transferes);
 
-// 迁移非js捆绑文件
+// 迁移views文件夹所有文件
+gulp.task('transfer', ['transferes'], transfer);
+
+// 迁移views文件夹所有文件（除js捆绑文件）
 gulp.task('transfer_reload', transfer_reload);
 
 // 编译项目
