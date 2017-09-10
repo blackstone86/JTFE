@@ -30,7 +30,8 @@
                     <div class="topbar-notice-arrow">
                     </div>
                     <div class="topbar-notice-head">
-                        <span>站内消息通知</span><a href="javaScript:" class="pull-right" style="font-size: 13px; color: rgb(0, 193, 222);">消息接收管理</a>
+                        <span>站内消息通知</span>
+                        <!-- <a href="javaScript:" class="pull-right" style="font-size: 13px; color: rgb(0, 193, 222);">消息接收管理</a> -->
                     </div>
                     <div>
                         <div class="topbar-notice-body">
@@ -38,22 +39,16 @@
                                 <li class="">
                                     <a href="javaScript:" target="_blank" class="clearfix">
                                         <span class="inline-block">
-                                            <span class="topbar-notice-link">特别邀请你成为阿里云云大使，获得推荐返利，专属培训等丰厚回报！</span>
+                                            <span class="topbar-notice-link">你有一条故障工单待处理！</span>
                                             <span class="topbar-notice-time">2017-08-23 11:43</span>
-                                        </span>
-                                        <span class="topbar-notice-class">
-                                            <span class="topbar-notice-class-name">域名和网站</span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="javaScript:" target="_blank" class="clearfix">
                                         <span class="inline-block">
-                                            <span class="topbar-notice-link">企业WiFi，首选云AP，即插即用，无限扩容！</span>
+                                            <span class="topbar-notice-link">你有一条故障工单延时半天！</span>
                                             <span class="topbar-notice-time">2017-08-21 10:46</span>
-                                        </span>
-                                        <span class="topbar-notice-class">
-                                            <span class="topbar-notice-class-name">优惠活动</span>
                                         </span>
                                     </a>
                                 </li>
@@ -134,12 +129,7 @@
             </div>
         </div>
     </div>
-    <!-- 
-        需求：
-        1.sidebar-nav同一时间只能显示一个
-        2.sidebar-nav没有子项则不显示
-        3.标注是否折叠，sidebar-unfold非折叠，sidebar-fold折叠
-     -->
+    <!-- 左侧菜单 -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -148,14 +138,14 @@
                         <i data-ico="menu"></i>
                     </div>
                     <div class="sidebar-nav">
-                        <div class="sidebar-title sidebar-trans" ng-click="titleClickHandler($event,$index)">
+                        <div class="sidebar-title sidebar-trans">
                             <div class="sidebar-title-inner">
                                 <span data-ico="ctrl" class="sidebar-title-icon"></span>
                                 <span class="sidebar-title-text" ng-bind="category.name">组织架构管理</span>
                             </div>
                         </div>
-                        <ul class="sidebar-trans" style="max-height: 0px;">
-                            <li class="nav-item active" >
+                        <ul class="sidebar-trans">
+                            <li class="nav-item">
                                 <a href="javaScript:" class="sidebar-trans">
                                     <div class="nav-icon sidebar-trans">
                                         <span data-ico="home2"></span>
@@ -197,15 +187,15 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="sidebar-nav sidebar-nav-active">
-                        <div class="sidebar-title sidebar-trans" ng-click="titleClickHandler($event,$index)">
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title sidebar-trans">
                             <div class="sidebar-title-inner">
                                 <span data-ico="ctrl" class="sidebar-title-icon"></span>
                                 <span class="sidebar-title-text" ng-bind="category.name">系统配置管理</span>
                             </div>
                         </div>
-                        <ul class="sidebar-trans" ng-style="{'max-height':$index == categoryUnfoldIndex? categoryHeight: 0}" style="max-height: 120px;">
-                            <li class="nav-item active">
+                        <ul class="sidebar-trans" style="max-height: 0px;">
+                            <li class="nav-item">
                                 <a href="javaScript:" class="sidebar-trans">
                                     <div class="nav-icon sidebar-trans">
                                         <span data-ico="image"></span>
