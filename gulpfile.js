@@ -79,7 +79,8 @@ function ejs2html(isreload){
       .pipe(
         ejs(
           {
-            entrance_script: '../' + dir + '/src/index.js'
+            entrance_script: '../' + dir + '/src/index.js',
+            root: '../' + dir
           },
           opts,
           settings

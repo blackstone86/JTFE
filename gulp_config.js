@@ -53,7 +53,8 @@ let transfesrc =
 exports.transfesrc = transfesrc;
 
 // 当前浏览视图
-let currview = "aimenu";
+// let currview = "aim-menu";
+let currview = "ali-menu";
 // let currview = "icon";
 // let currview = "gantt";
 exports.currview = currview;
