@@ -1,3 +1,5 @@
+@import "../../../components/common/var";
+
 * {
 	margin: 0;
 	padding: 0;
@@ -42,7 +44,7 @@ a:hover {
 }
 
 .topbar {
-	background-color: #373d41;
+	background-color: @topbarBg;
 	height: 50px;
 	width: 100%;
 	left: 0;
@@ -134,13 +136,13 @@ a:hover {
 	height: 50px;
 	display: block;
 	z-index: 2;
-	border-right: 1px solid #2a2f32;
+	border-right: 1px solid @topbarBtnHoverColor;
 	font-size: 14px;
 	line-height: 50px
 }
 
 .topbar .topbar-info .topbar-btn:hover {
-	background-color: #2a2f32
+	background-color: @topbarBtnHoverColor;
 }
 
 .topbar .topbar-info .topbar-info-btn a {
@@ -1242,12 +1244,12 @@ a:hover {
 	height: 50px;
 	display: block;
 	z-index: 2;
-	border-right: 1px solid #2a2f32;
+	border-right: 1px solid @topbarBtnHoverColor;
 	color: #fff
 }
 
 .topbar-notice .topbar-btn:hover {
-	background: #2a2f32
+	background: @topbarBtnHoverColor
 }
 
 .topbar-notice .topbar-btn-notice-icon {
@@ -1393,7 +1395,7 @@ a:hover {
 	height: 50px;
 	display: block;
 	z-index: 2;
-	border-right: 1px solid #2a2f32;
+	border-right: 1px solid @topbarBtnHoverColor;
 	position: relative;
 	color: #fff;
 	font-size: 14px;
@@ -1401,7 +1403,7 @@ a:hover {
 }
 
 .topbar .topbar-search .topbar-btn:hover {
-	background: #2a2f32
+	background: @topbarBtnHoverColor
 }
 
 .topbar .topbar-search .topbar-search-dropdown {
@@ -1410,7 +1412,7 @@ a:hover {
 	bottom: -38px;
 	right: -1px;
 	left: auto;
-	border: 2px solid #2a2f32;
+	border: 2px solid @topbarBtnHoverColor;
 	background: #fff;
 	padding: 0;
 	top: 100%;
@@ -1470,7 +1472,7 @@ a:hover {
 }
 
 .topbar-product .topbar-btn:hover {
-	background: #2a2f32
+	background: @topbarBtnHoverColor
 }
 
 .topbar-product .icon-arrow-down {
@@ -1697,7 +1699,7 @@ a:hover {
 }
 
 .aliyun-logo a:hover {
-	background: #2a2f32
+	background: @topbarBtnHoverColor
 }
 
 .aliyun-logo .aliyun-icon {
@@ -1731,14 +1733,14 @@ a:hover {
 	height: 50px;
 	display: block;
 	z-index: 2;
-	border-right: 1px solid #2a2f32;
+	border-right: 1px solid @topbarBtnHoverColor;
 	font-size: 14px;
 	line-height: 50px;
 	color: #fff
 }
 
 .enterprise-logo .topbar-btn:hover {
-	background: #2a2f32;
+	background: @topbarBtnHoverColor;
 	cursor: pointer
 }
 
@@ -1797,7 +1799,7 @@ a:hover {
 }
 
 .aliyun-logo a:hover {
-	background: #2a2f32
+	background: @topbarBtnHoverColor
 }
 
 .aliyun-logo .aliyun-icon {
